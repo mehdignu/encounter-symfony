@@ -1,7 +1,5 @@
 <?php
-// myapplication/src/sandboxBundle/Command/SocketCommand.php
-// Change the namespace according to your bundle
-namespace App\Controller\Command;
+namespace App\Chat\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -10,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 // Ratchet libs
 use Ratchet\App;
 // Chat instance
-use App\Controller\Sockets\Chat;
+use App\Chat\Sockets\Chat;
 
 class SocketCommand extends Command
 {

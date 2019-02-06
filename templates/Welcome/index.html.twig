@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Welcome to Encounter {% endblock %}
+
+
+{% block main %}
+
+
+    <div class="row">
+        <div class="col">
+
+            <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+
+                <a href="#" class="btn btn-secondary" style="width: 100%">create encounter</a>
+
+            </div>
+
+
+        </div>
+        <div class="col-5">
+
+            <div class="card" style="width: 130%;">
+                <img class="card-img-top" src="https://via.placeholder.com/150" alt="Card image cap" style="height: 11rem;">
+                <div class="card-body">
+                    <h5 class="card-title">bar hangouts</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+
+                <div class="card" style="width: 100%;">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">1 of 2 people will encounter</li>
+                        <li class="list-group-item">Time: 12:00am</li>
+                    </ul>
+                </div>
+
+
+                <a href="#" class="btn btn-primary" style="width: 100%">request to join</a>
+
+            </div>
+
+
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
+
+
+
+{% endblock %}

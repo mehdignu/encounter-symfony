@@ -33,6 +33,4 @@ class HomeController extends AbstractController
     }
 
 
-
-
 }

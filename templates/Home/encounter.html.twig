@@ -1,78 +1,123 @@
-<h1>Public chat</h1>
-<ul id="chat-list"></ul>
-<hr>
-<textarea id="form-message" placeholder="Your public message here"></textarea>
-<input type="button" id="form-submit" value="Send message"/>
+{% extends 'base.html.twig' %}
 
-<script>
-    // This object will be sent everytime you submit a message in the sendMessage function.
-    var clientInformation = {
-        username: new Date().getTime().toString()
-        // You can add more information in a static object
-    };
+{% block title %} encounter title here {% endblock %}
 
-    // START SOCKET CONFIG
-    /**
-     * Note that you need to change the "sandbox" for the URL of your project.
-     * According to the configuration in Sockets/Chat.php , change the port if you need to.
-     * @type WebSocket
-     */
-    var conn = new WebSocket('ws://encounter.test:8080/encounter');
+    {% block stylesheets %}
 
-    conn.onopen = function(e) {
-        console.info("Connection established succesfully");
-    };
+        <link rel="stylesheet" type="text/css" href="/assets/css/chat.css">
 
-    conn.onmessage = function(e) {
-        var data = JSON.parse(e.data);
-        Chat.appendMessage(data.username, data.message);
+    {% endblock %}
 
-        console.log(data);
-    };
-
-    conn.onerror = function(e){
-        alert("Error: something went wrong with the socket.");
-        console.error(e);
-    };
-    // END SOCKET CONFIG
+{% block main %}
 
 
-    /// Some code to add the messages to the list element and the message submit.
-    document.getElementById("form-submit").addEventListener("click",function(){
-        var msg = document.getElementById("form-message").value;
+    <ul id="chat-list"></ul>
 
-        if(!msg){
-            alert("Please send something on the chat");
-        }
+    <hr>
 
-        Chat.sendMessage(msg);
-        // Empty text area
-        document.getElementById("form-message").value = "";
-    }, false);
 
-    // Mini API to send a message with the socket and append a message in a UL element.
-    var Chat = {
-        appendMessage: function(username,message){
-            var from;
+    <div class="container-fluid">
 
-            if(username == clientInformation.username){
-                from = "me";
-            }else{
-                from = clientInformation.username;
-            }
+    <div class="row">
+        <div class="col-xs-4 col-sm-2">
 
-            // Append List Item
-            var ul = document.getElementById("chat-list");
-            var li = document.createElement("li");
-            li.appendChild(document.createTextNode(from + " : "+ message));
-            ul.appendChild(li);
-        },
-        sendMessage: function(text){
-            clientInformation.message = text;
-            // Send info as JSON
-            conn.send(JSON.stringify(clientInformation));
-            // Add my own message to the list
-            this.appendMessage(clientInformation.username, clientInformation.message);
-        }
-    };
-</script>
+            <p>infos over the encounter</p>
+
+
+        </div>
+        <div class="col-xs-8 col-sm-8">
+            <div class="chat-container">
+                <h3 class=" text-center">Messaging</h3>
+                <div class="messaging">
+                    <div class="inbox_msg">
+                        <div class="mesgs">
+                            <div class="msg_history">
+                                <div class="incoming_msg">
+                                    <div class="incoming_msg_img"><img
+                                                src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                                    </div>
+                                    <div class="received_msg">
+                                        <div class="received_withd_msg">
+                                            <p>Test which is a new approach to have all
+                                                solutions</p>
+                                            <span class="time_date"> 11:01 AM    |    June 9</span></div>
+                                    </div>
+                                </div>
+                                <div class="outgoing_msg">
+                                    <div class="sent_msg">
+                                        <p>Test which is a new approach to have all
+                                            solutions</p>
+                                        <span class="time_date"> 11:01 AM    |    June 9</span></div>
+                                </div>
+                                <div class="incoming_msg">
+                                    <div class="incoming_msg_img"><img
+                                                src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                                    </div>
+                                    <div class="received_msg">
+                                        <div class="received_withd_msg">
+                                            <p>Test, which is a new approach to have</p>
+                                            <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
+                                    </div>
+                                </div>
+                                <div class="outgoing_msg">
+                                    <div class="sent_msg">
+                                        <p>Apollo University, Delhi, India Test</p>
+                                        <span class="time_date"> 11:01 AM    |    Today</span></div>
+                                </div>
+                                <div class="incoming_msg">
+                                    <div class="incoming_msg_img"><img
+                                                src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                                    </div>
+                                    <div class="received_msg">
+                                        <div class="received_withd_msg">
+                                            <p>We work directly with our designers and suppliers,
+                                                and sell direct to you, which means quality, exclusive
+                                                products, at a price anyone can afford.</p>
+                                            <span class="time_date"> 11:01 AM    |    Today</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="type_msg">
+                                <div class="input_msg_write">
+                                    <input type="text" class="write_msg" id="chat-message"
+                                           placeholder="Type a message"/>
+                                    <button class="msg_send_btn" id="chat-submit" type="button"><i
+                                                class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+        <!-- Optional: clear the XS cols if their content doesn't match in height -->
+        <div class="clearfix visible-xs-block"></div>
+
+        <div class="col-xs-4 col-sm-2">
+
+            <p>profiles of the attendees</p>
+
+        </div>
+    </div>
+
+
+
+
+    </div>
+
+
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+    <script src="/assets/js/chat.js"></script>
+
+{% endblock %}
+
+

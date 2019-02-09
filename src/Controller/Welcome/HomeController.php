@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-
+use App\Form\CreateFormType;
 
 
 class HomeController extends AbstractController
@@ -30,6 +30,29 @@ class HomeController extends AbstractController
     public function encounter($id)
     {
         return $this->render('Home/encounter.html.twig');
+    }
+
+
+    /**
+     * @Route("/create", name="create_encounter")
+     */
+    public function create(Request $request){
+
+        $form = $this->createForm(CreateFormType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $searchFormData = $form->getData();
+
+
+        }
+
+
+        return $this->render('Home/create.html.twig', [
+            'our_form' => $form->createView()
+        ]);
+
     }
 
 

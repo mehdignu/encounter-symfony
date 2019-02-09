@@ -45,6 +45,7 @@ class HomeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $searchFormData = $form->getData();
 
+            return $this->redirectToRoute('home_page');
 
         }
 
